@@ -1,0 +1,31 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "finance": {
+      "type": "local",
+      "command": [
+        ".venv/bin/mcp_server"
+      ],
+      "environment": {
+        "OPENROUTER_API_KEY": "{env:OPENROUTER_API_KEY}",
+        "TINVEST_READONLY_TOKEN": "{env:TINVEST_READONLY_TOKEN}",
+        "LOCAL_ALLOWED_ACCOUNT_IDS": "{env:LOCAL_ALLOWED_ACCOUNT_IDS}",
+        "TINVEST_GRPC_TARGET": "{env:TINVEST_GRPC_TARGET}",
+        "TINVEST_CA_BUNDLE": "{env:TINVEST_CA_BUNDLE}",
+        "GRPC_DEFAULT_SSL_ROOTS_FILE_PATH": "{env:GRPC_DEFAULT_SSL_ROOTS_FILE_PATH}"
+      },
+      "timeout": 120000,
+      "enabled": true
+    }
+  },
+  "agent": {
+    "finance-tools": {
+      "description": "Uses guarded finance MCP tools only",
+      "mode": "subagent",
+      "permission": {
+        "*": "deny",
+        "finance_*": "allow"
+      }
+    }
+  }
+}
